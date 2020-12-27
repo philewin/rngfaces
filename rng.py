@@ -3,16 +3,17 @@ import matplotlib.pyplot as plt
 import os, os.path
 import cv2
 from datetime import datetime
-
+from pathlib import Path
+Path("faces/imgwithfaces/raw/").mkdir(parents=True, exist_ok=True)
+Path("faces/onlyfaces/").mkdir(parents=True, exist_ok=True)
+Path("faces/imgwithfaces/rectangles/").mkdir(parents=True, exist_ok=True)
+Path("nofaces/").mkdir(parents=True, exist_ok=True)
 rngtype = "prng"
 p=1000
 nimg=1
 sinput=False
 for n in range(nimg):
-
     ar=[]
-
-
     now = datetime.now().strftime("%m%d%Y%H%M%S")+"_p"+str(p)+"_"+rngtype
     print("generating img_input{0}.png".format(now))
     if rngtype == "urandom":
