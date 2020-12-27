@@ -5,6 +5,7 @@ import cv2
 from datetime import datetime
 from pathlib import Path
 import yaml
+import gc
 config = yaml.safe_load(open("cfg.yml"))
 p=config['p']
 rngtype=config['rngtype']
@@ -66,12 +67,14 @@ for n in range(nimg):
             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 10)
     # Display the output
         cv2.imwrite('faces/imgwithfaces/rectangles/faceimg{0}.png'.format(now), img)
+        gc.collect()
     else:
         print("no faces :-(")
         if not sinput:
             os.remove("faces/imgwithfaces/raw/img_rawfaces{0}.png".format(now))
         else:
-            os.system('cp faces/imgwithfaces/raw/img_rawfaces{0}.png'.format(now)+" " +'nofaces/img_raw{0}.png'.format(now) )  
+            os.system('cp faces/imgwithfaces/raw/img_rawfaces{0}.png'.format(now)+" " +'nofaces/img_raw{0}.png'.format(now) )
+            gc.collect()
         
 
 
